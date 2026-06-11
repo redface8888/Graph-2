@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Top 10 départements — Soliguide</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; padding: 20px; background: #fff; color: #111; }
+  h2 { font-size: 14px; font-weight: 500; color: #666; text-transform: uppercase; letter-spacing: .05em; margin: 0 0 16px; }
+  .legend { display: flex; gap: 16px; font-size: 12px; color: #666; margin-bottom: 20px; }
+  .legend span { display: flex; align-items: center; gap: 5px; }
+  .dot { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+  .chart { display: flex; flex-direction: column; gap: 10px; }
+  .row { display: flex; align-items: center; gap: 10px; }
+  .label { width: 160px; font-size: 13px; color: #333; text-align: right; flex-shrink: 0; }
+  .bar-wrap { flex: 1; position: relative; height: 28px; }
+  .bar-services { position: absolute; top: 0; left: 0; height: 100%; background: #7F77DD; border-radius: 3px; }
+  .bar-fiches   { position: absolute; top: 0; left: 0; height: 100%; background: #9FE1CB; border-radius: 3px; }
+  .val { font-size: 11px; color: #555; white-space: nowrap; margin-left: 6px; }
+</style>
+</head>
+<body>
+
+<h2>Top 10 départements — fiches & services restants</h2>
+
+<div class="legend">
+  <span><span class="dot" style="background:#9FE1CB"></span>Fiches restantes</span>
+  <span><span class="dot" style="background:#7F77DD"></span>Services restants (hors fiches)</span>
+</div>
+
+<div class="chart" id="chart"></div>
+
+<script>
+var data = [
+  {d:'Rhône',              rf:1012, rs:3456},
+  {d:'Pas-de-Calais',      rf:985,  rs:3381},
+  {d:'Isère',              rf:864,  rs:2914},
+  {d:'Moselle',            rf:817,  rs:2608},
+  {d:'Oise',               rf:741,  rs:2467},
+  {d:'Finistère',          rf:653,  rs:2056},
+  {d:'Calvados',           rf:644,  rs:2133},
+  {d:'Ille-et-Vilaine',    rf:644,  rs:2045},
+  {d:'Meurthe-et-Moselle', rf:639,  rs:2167},
+  {d:'Ain',                rf:616,  rs:2010}
+];
+
+var maxVal = Math.max.apply(null, data.map(function(d){ return d.rs; }));
+var chart = document.getElementById('chart');
+
+data.forEach(function(d) {
+  var pctS = (d.rs / maxVal * 100).toFixed(1);
+  var pctF = (d.rf / maxVal * 100).toFixed(1);
+
+  var row = document.createElement('div');
+  row.className = 'row';
+
+  var label = document.createElement('div');
+  label.className = 'label';
+  label.textContent = d.d;
+
+  var wrap = document.createElement('div');
+  wrap.className = 'bar-wrap';
+
+  var barS = document.createElement('div');
+  barS.className = 'bar-services';
+  barS.style.width = pctS + '%';
+  barS.title = 'Services restants : ' + d.rs.toLocaleString('fr-FR');
+
+  var barF = document.createElement('div');
+  barF.className = 'bar-fiches';
+  barF.style.width = pctF + '%';
+  barF.title = 'Fiches restantes : ' + d.rf.toLocaleString('fr-FR');
+
+  wrap.appendChild(barS);
+  wrap.appendChild(barF);
+
+  var val = document.createElement('div');
+  val.className = 'val';
+  val.textContent = d.rf.toLocaleString('fr-FR') + ' fiches · ' + d.rs.toLocaleString('fr-FR') + ' services';
+
+  row.appendChild(label);
+  row.appendChild(wrap);
+  row.appendChild(val);
+  chart.appendChild(row);
+});
+</script>
+</body>
+</html>
