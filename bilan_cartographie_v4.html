@@ -1,0 +1,253 @@
+
+<h2 class="sr-only">Tableau de bord cartographie Soliguide — état des lieux, régions, Catalogne, top 10, projections 2 ans, pays</h2>
+<style>
+.st{font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.06em;margin:2rem 0 .6rem}
+.st:first-child{margin-top:0}
+.cards{display:grid;gap:8px;margin-bottom:.75rem}
+.card{background:var(--color-background-secondary);border-radius:8px;padding:10px 12px}
+.card .lbl{font-size:11px;color:var(--color-text-secondary);margin-bottom:2px}
+.card .val{font-size:18px;font-weight:500;color:var(--color-text-primary)}
+.card .sub{font-size:11px;color:var(--color-text-tertiary);margin-top:1px}
+.sb{height:7px;border-radius:3px;overflow:hidden;display:flex;margin:2px 0 7px}
+.leg{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--color-text-secondary);margin-bottom:8px}
+.leg b{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:3px;vertical-align:middle}
+hr{border:none;border-top:.5px solid var(--color-border-tertiary);margin:1.5rem 0}
+</style>
+
+<div class="st">État des lieux — France & Espagne</div>
+<div class="leg"><b style="background:#1D9E75"></b>Fiches en ligne <b style="background:#185FA5"></b>Services en ligne <b style="background:#D3D1C7"></b>Reste</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+<div>
+  <p style="font-size:13px;font-weight:500;margin:0 0 6px;color:var(--color-text-primary)">🇫🇷 France — 102 territoires</p>
+  <div class="cards" style="grid-template-columns:repeat(3,1fr)">
+    <div class="card"><div class="lbl">Active</div><div class="val" style="color:#0F6E56">33</div></div>
+    <div class="card"><div class="lbl">Franchise</div><div class="val" style="color:#185FA5">10</div></div>
+    <div class="card"><div class="lbl">Non lancés</div><div class="val" style="color:#888780">59</div></div>
+  </div>
+  <div class="cards" style="grid-template-columns:1fr 1fr">
+    <div class="card"><div class="lbl">Fiches en ligne</div><div class="val">33 710</div><div class="sub">sur 66 560 projetées</div></div>
+    <div class="card"><div class="lbl">Services en ligne</div><div class="val">116 009</div><div class="sub">sur 224 857 projetés</div></div>
+  </div>
+  <div style="font-size:12px;color:var(--color-text-secondary);margin:0 0 2px">Fiches — 50,6%</div>
+  <div class="sb"><div style="width:50.6%;background:#1D9E75"></div><div style="flex:1;background:#D3D1C7"></div></div>
+  <div style="font-size:12px;color:var(--color-text-secondary);margin:0 0 2px">Services — 51,6%</div>
+  <div class="sb"><div style="width:51.6%;background:#185FA5"></div><div style="flex:1;background:#D3D1C7"></div></div>
+</div>
+<div>
+  <p style="font-size:13px;font-weight:500;margin:0 0 6px;color:var(--color-text-primary)">🇪🇸 Espagne — 59 territoires</p>
+  <div class="cards" style="grid-template-columns:repeat(3,1fr)">
+    <div class="card"><div class="lbl">Active</div><div class="val" style="color:#0F6E56">0</div></div>
+    <div class="card"><div class="lbl">Franchise</div><div class="val" style="color:#185FA5">4</div></div>
+    <div class="card"><div class="lbl">Non lancés</div><div class="val" style="color:#888780">55</div></div>
+  </div>
+  <div class="cards" style="grid-template-columns:1fr 1fr">
+    <div class="card"><div class="lbl">Fiches en ligne</div><div class="val">2 077</div><div class="sub">sur 42 918 projetées</div></div>
+    <div class="card"><div class="lbl">Services en ligne</div><div class="val">7 312</div><div class="sub">sur 140 221 projetés</div></div>
+  </div>
+  <div style="font-size:12px;color:var(--color-text-secondary);margin:0 0 2px">Fiches — 4,8%</div>
+  <div class="sb"><div style="width:4.8%;background:#1D9E75"></div><div style="flex:1;background:#D3D1C7"></div></div>
+  <div style="font-size:12px;color:var(--color-text-secondary);margin:0 0 2px">Services — 5,2%</div>
+  <div class="sb"><div style="width:5.2%;background:#185FA5"></div><div style="flex:1;background:#D3D1C7"></div></div>
+</div>
+</div>
+
+<hr>
+<div class="st">Régions françaises — volume total de fiches (ordre décroissant)</div>
+<div class="leg"><b style="background:#1D9E75"></b>Fiches en ligne <b style="background:#D3D1C7"></b>Reste à produire</div>
+<div style="position:relative;width:100%;height:480px"><canvas id="c1" role="img" aria-label="Régions françaises par volume décroissant avec % complétion sur chaque barre.">Régions françaises fiches en ligne vs reste.</canvas></div>
+
+<hr>
+<div class="st">Catalogne — 4 provinces</div>
+<div class="leg"><b style="background:#1D9E75"></b>Fiches en ligne <b style="background:#D3D1C7"></b>Reste</div>
+<div style="position:relative;width:100%;height:190px"><canvas id="c2" role="img" aria-label="4 provinces catalanes, Lleida 84%, Girona 44%, Tarragona 38%, Barcelona 23%.">Catalogne fiches actuelles vs projection.</canvas></div>
+
+<hr>
+<div class="st">Top 10 départements — fiches & services restants</div>
+<div class="leg"><b style="background:#9FE1CB"></b>Fiches restantes <b style="background:#7F77DD"></b>Services restants (hors fiches)</div>
+<div style="position:relative;width:100%;height:380px"><canvas id="c3" role="img" aria-label="Top 10 départements par volume restant, Rhône en tête avec 1012 fiches et 3456 services.">Top 10 fiches et services restants.</canvas></div>
+
+<hr>
+<div class="st">Évolution à 2 ans — si tous les départements français étaient lancés aujourd'hui</div>
+<div class="leg">
+  <b style="background:#EF9F27"></b>Pessimiste
+  <b style="background:#1D9E75"></b>Central
+  <b style="background:#185FA5"></b>Optimiste
+  <b style="background:#D3D1C7;border:1px dashed #888"></b>Projections bas / central / haut
+</div>
+<div style="position:relative;width:100%;height:260px"><canvas id="c4" role="img" aria-label="Courbes d'évolution fiches sur 2 ans. Aujourd'hui 33710. À 2 ans : pessimiste 59167, central 60518, optimiste 61863. Projections cibles : bas 61795, central 66560, haut 71909.">Évolution fiches à 2 ans selon 3 scénarios.</canvas></div>
+
+<hr>
+<div class="st">Projection fiches & services par pays connu</div>
+<div class="leg"><b style="background:#9FE1CB"></b>Fiches projetées <b style="background:#185FA5"></b>Services projetés (hors fiches)</div>
+<div style="position:relative;width:100%;height:290px"><canvas id="c5" role="img" aria-label="Barres horizontales par pays. Allemagne 83411 fiches + 198372 services restants = 281783 total. Puis Royaume-Uni, France, Italie, Espagne, Pologne.">Projection fiches et services par pays.</canvas></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const G='#1D9E75',GL='#9FE1CB',B='#185FA5',BL='#85B7EB',GR='#D3D1C7',AM='#EF9F27',PU='#7F77DD',PUL='#AFA9EC';
+
+// C1 – Régions
+const reg=[
+  {r:'Île-de-France',fa:8965,fp:9664},
+  {r:'Occitanie',fa:4644,fp:7055},
+  {r:'Nouvelle-Aquitaine',fa:3702,fp:6777},
+  {r:'Grand Est',fa:2071,fp:5878},
+  {r:'Auvergne-Rhône-Alpes',fa:2309,fp:7684},
+  {r:'PACA',fa:3863,fp:5038},
+  {r:'Hauts-de-France',fa:1736,fp:4609},
+  {r:'Bourgogne-Franche-Comté',fa:839,fp:3596},
+  {r:'Pays de la Loire',fa:1353,fp:3535},
+  {r:'Normandie',fa:1035,fp:3234},
+  {r:'Centre-Val de Loire',fa:1126,fp:3084},
+  {r:'Bretagne',fa:1790,fp:3110},
+  {r:'Corse',fa:20,fp:620},
+].sort((a,b)=>b.fp-a.fp);
+
+new Chart(document.getElementById('c1'),{
+  type:'bar',
+  data:{
+    labels:reg.map(d=>d.r+' — '+Math.round(d.fa/d.fp*100)+'%'),
+    datasets:[
+      {label:'Fiches',data:reg.map(d=>d.fa),backgroundColor:G,borderRadius:2},
+      {label:'Reste',data:reg.map(d=>d.fp-d.fa),backgroundColor:GR,borderRadius:2},
+    ]
+  },
+  options:{
+    indexAxis:'y',responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{mode:'index',callbacks:{
+      title:i=>i[0].label.split(' — ')[0],
+      label:ctx=>ctx.datasetIndex===0?'Fiches: '+ctx.raw.toLocaleString('fr-FR'):'Restantes: '+ctx.raw.toLocaleString('fr-FR')
+    }}},
+    scales:{
+      x:{stacked:true,ticks:{font:{size:10}},grid:{color:'rgba(128,128,128,.1)'}},
+      y:{stacked:true,ticks:{font:{size:11}},grid:{display:false}}
+    }
+  }
+});
+
+// C2 – Catalogne
+const cat=[
+  {d:'Lleida — 84%',act:448,proj:535},
+  {d:'Girona — 44%',act:334,proj:754},
+  {d:'Tarragona — 38%',act:297,proj:775},
+  {d:'Barcelona — 23%',act:998,proj:4285},
+];
+new Chart(document.getElementById('c2'),{
+  type:'bar',
+  data:{
+    labels:cat.map(d=>d.d),
+    datasets:[
+      {label:'Fiches',data:cat.map(d=>d.act),backgroundColor:G,borderRadius:3},
+      {label:'Reste',data:cat.map(d=>d.proj-d.act),backgroundColor:GR,borderRadius:3},
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{
+      label:ctx=>ctx.datasetIndex===0?ctx.raw.toLocaleString('fr-FR')+' fiches':ctx.raw.toLocaleString('fr-FR')+' restantes'
+    }}},
+    scales:{x:{stacked:true,ticks:{font:{size:12}}},y:{stacked:true,ticks:{font:{size:10}}}}
+  }
+});
+
+// C3 – Top 10
+const top=[
+  {d:'Rhône',rf:1012,rs:3456},
+  {d:'Pas-de-Calais',rf:985,rs:3381},
+  {d:'Isère',rf:864,rs:2914},
+  {d:'Moselle',rf:817,rs:2608},
+  {d:'Oise',rf:741,rs:2467},
+  {d:'Finistère',rf:653,rs:2056},
+  {d:'Calvados',rf:644,rs:2133},
+  {d:'Ille-et-Vilaine',rf:644,rs:2045},
+  {d:'Meurthe-et-Moselle',rf:639,rs:2167},
+  {d:'Ain',rf:616,rs:2010},
+].sort((a,b)=>a.rs-b.rs);
+new Chart(document.getElementById('c3'),{
+  type:'bar',
+  data:{
+    labels:top.map(d=>d.d),
+    datasets:[
+      {label:'Fiches restantes',data:top.map(d=>d.rf),backgroundColor:GL,borderRadius:2},
+      {label:'Services (hors fiches)',data:top.map(d=>d.rs-d.rf),backgroundColor:PU,borderRadius:2},
+    ]
+  },
+  options:{
+    indexAxis:'y',responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{
+      title:i=>i[0].label,
+      label:ctx=>ctx.datasetIndex===0
+        ?'Fiches restantes: '+ctx.raw.toLocaleString('fr-FR')
+        :'Services total: '+(ctx.raw+top.find(d=>d.d===ctx.label).rf).toLocaleString('fr-FR')
+    }}},
+    scales:{
+      x:{stacked:true,ticks:{font:{size:10}}},
+      y:{stacked:true,ticks:{font:{size:11}},grid:{display:false}}
+    }
+  }
+});
+
+// C4 – Courbes 2 ans
+new Chart(document.getElementById('c4'),{
+  type:'line',
+  data:{
+    labels:["Aujourd'hui","Dans 2 ans"],
+    datasets:[
+      {label:'Pessimiste',data:[33710,59167],borderColor:AM,fill:false,tension:0,pointRadius:5,pointBackgroundColor:AM,borderWidth:2.5},
+      {label:'Central',   data:[33710,60518],borderColor:G, fill:false,tension:0,pointRadius:5,pointBackgroundColor:G, borderWidth:2.5},
+      {label:'Optimiste', data:[33710,61863],borderColor:B, fill:false,tension:0,pointRadius:5,pointBackgroundColor:B, borderWidth:2.5},
+      {label:'Proj. bas',    data:[33710,61795], borderColor:'#B4B2A9',borderDash:[5,4],pointRadius:3,borderWidth:1.5,fill:false,pointBackgroundColor:'#B4B2A9'},
+      {label:'Proj. central',data:[33710,66560], borderColor:'#888780',borderDash:[5,4],pointRadius:3,borderWidth:1.5,fill:false,pointBackgroundColor:'#888780'},
+      {label:'Proj. haut',   data:[33710,71909], borderColor:'#5F5E5A',borderDash:[5,4],pointRadius:3,borderWidth:1.5,fill:false,pointBackgroundColor:'#5F5E5A'},
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{
+      legend:{display:false},
+      tooltip:{callbacks:{
+        label:ctx=>{
+          const n=['Pessimiste','Central','Optimiste','Proj. bas','Proj. central','Proj. haut'][ctx.datasetIndex];
+          return n+': '+ctx.raw.toLocaleString('fr-FR')+' fiches';
+        }
+      }}
+    },
+    scales:{
+      x:{ticks:{font:{size:12}}},
+      y:{min:28000,max:75000,ticks:{font:{size:10},callback:v=>Math.round(v/1000)+'K'}}
+    }
+  }
+});
+
+// C5 – Pays horizontal
+const pays=[
+  {p:'Allemagne',   f:83411,s:281783},
+  {p:'Royaume-Uni', f:69736,s:235587},
+  {p:'France',      f:66560,s:224857},
+  {p:'Italie',      f:58765,s:198564},
+  {p:'Espagne',     f:42918,s:140221},
+  {p:'Pologne',     f:33942,s:110895},
+];
+new Chart(document.getElementById('c5'),{
+  type:'bar',
+  data:{
+    labels:pays.map(d=>d.p),
+    datasets:[
+      {label:'Fiches',data:pays.map(d=>d.f),backgroundColor:GL,borderRadius:3},
+      {label:'Services (hors fiches)',data:pays.map(d=>d.s-d.f),backgroundColor:B,borderRadius:3},
+    ]
+  },
+  options:{
+    indexAxis:'y',responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{
+      title:i=>i[0].label,
+      label:ctx=>ctx.datasetIndex===0
+        ?'Fiches: '+ctx.raw.toLocaleString('fr-FR')
+        :'Services total: '+pays.find(d=>d.p===ctx.label).s.toLocaleString('fr-FR')
+    }}},
+    scales:{
+      x:{stacked:true,ticks:{font:{size:11},callback:v=>Math.round(v/1000)+'K'}},
+      y:{stacked:true,ticks:{font:{size:12}},grid:{display:false}}
+    }
+  }
+});
+</script>
