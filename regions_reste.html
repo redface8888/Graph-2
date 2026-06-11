@@ -1,0 +1,53 @@
+
+<h2 class="sr-only">Régions françaises classées par volume de fiches restantes à produire, ordre décroissant</h2>
+<div style="position:relative;width:100%;height:400px">
+  <canvas id="c" role="img" aria-label="Régions françaises par fiches restantes décroissant. Auvergne-Rhône-Alpes 5375 en haut, Île-de-France 699 en bas.">Fiches restantes à produire par région.</canvas>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+var reg = [
+  {r:'Île-de-France',          reste:699},
+  {r:'PACA',                   reste:1175},
+  {r:'Bretagne',               reste:1320},
+  {r:'Centre-Val de Loire',    reste:1958},
+  {r:'Normandie',              reste:2199},
+  {r:'Bourgogne-Franche-Comté',reste:2757},
+  {r:'Hauts-de-France',        reste:2873},
+  {r:'Pays de la Loire',       reste:2182},
+  {r:'Grand Est',              reste:3807},
+  {r:'Nouvelle-Aquitaine',     reste:3075},
+  {r:'Occitanie',              reste:2411},
+  {r:'Auvergne-Rhône-Alpes',   reste:5375},
+  {r:'Corse',                  reste:600}
+].sort(function(a,b){ return b.reste - a.reste; });
+
+new Chart(document.getElementById('c'), {
+  type: 'bar',
+  data: {
+    labels: reg.map(function(d){ return d.r; }),
+    datasets: [{
+      label: 'Fiches restantes',
+      data: reg.map(function(d){ return d.reste; }),
+      backgroundColor: '#D3D1C7',
+      borderRadius: 3
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: function(ctx){ return ctx.raw.toLocaleString('fr-FR') + ' fiches restantes'; }
+        }
+      }
+    },
+    scales: {
+      x: { ticks: { font: { size: 10 } }, grid: { color: 'rgba(128,128,128,.1)' } },
+      y: { ticks: { font: { size: 11 } }, grid: { display: false } }
+    }
+  }
+});
+</script>
