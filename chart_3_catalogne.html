@@ -1,0 +1,27 @@
+
+<h2 class="sr-only">Catalogne 4 provinces fiches actuelles vs projection</h2>
+<div style="position:relative;width:100%;height:200px">
+  <canvas id="c2" role="img" aria-label="4 provinces catalanes. Lleida 84%, Girona 44%, Tarragona 38%, Barcelona 23%.">Catalogne fiches actuelles vs projection.</canvas>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+new Chart(document.getElementById('c2'), {
+  type: 'bar',
+  data: {
+    labels: ['Lleida — 84%', 'Girona — 44%', 'Tarragona — 38%', 'Barcelona — 23%'],
+    datasets: [
+      {label:'Fiches', data:[448, 334, 297, 998], backgroundColor:'#1D9E75', borderRadius:3},
+      {label:'Reste',  data:[87, 420, 478, 3287], backgroundColor:'#D3D1C7', borderRadius:3}
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {legend:{display:false}},
+    scales: {
+      x: {stacked:true, ticks:{font:{size:12}}},
+      y: {stacked:true, ticks:{font:{size:10}}}
+    }
+  }
+});
+</script>
