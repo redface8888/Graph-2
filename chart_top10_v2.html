@@ -1,0 +1,58 @@
+
+<h2 class="sr-only">Top 10 départements français par fiches et services restants, ordre décroissant</h2>
+<div style="display:flex;gap:12px;font-size:12px;color:var(--color-text-secondary);margin-bottom:8px">
+  <span><span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:#9FE1CB;margin-right:3px;vertical-align:middle"></span>Fiches restantes</span>
+  <span><span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:#7F77DD;margin-right:3px;vertical-align:middle"></span>Services restants (hors fiches)</span>
+</div>
+<div style="position:relative;width:100%;height:420px">
+  <canvas id="c" role="img" aria-label="Top 10 départements français par volume restant ordre décroissant. Rhône en haut (1012 fiches, 3456 services), Ain en bas (616 fiches, 2010 services).">Top 10 départements fiches et services restants.</canvas>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+var top = [
+  {d:'Rhône',              rf:1012, rs:3456},
+  {d:'Pas-de-Calais',      rf:985,  rs:3381},
+  {d:'Isère',              rf:864,  rs:2914},
+  {d:'Moselle',            rf:817,  rs:2608},
+  {d:'Oise',               rf:741,  rs:2467},
+  {d:'Finistère',          rf:653,  rs:2056},
+  {d:'Calvados',           rf:644,  rs:2133},
+  {d:'Ille-et-Vilaine',    rf:644,  rs:2045},
+  {d:'Meurthe-et-Moselle', rf:639,  rs:2167},
+  {d:'Ain',                rf:616,  rs:2010}
+];
+
+new Chart(document.getElementById('c'), {
+  type: 'bar',
+  data: {
+    labels: top.map(function(d){ return d.d; }),
+    datasets: [
+      {label:'Fiches restantes',           data:top.map(function(d){return d.rf;}),        backgroundColor:'#9FE1CB', borderRadius:2},
+      {label:'Services restants (hors fiches)', data:top.map(function(d){return d.rs-d.rf;}), backgroundColor:'#7F77DD', borderRadius:2}
+    ]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {display:false},
+      tooltip: {
+        callbacks: {
+          title: function(i){ return i[0].label; },
+          label: function(ctx){
+            var t = top.find(function(d){ return d.d === ctx.label; });
+            return ctx.datasetIndex === 0
+              ? 'Fiches restantes : ' + ctx.raw.toLocaleString('fr-FR')
+              : 'Services total : ' + t.rs.toLocaleString('fr-FR');
+          }
+        }
+      }
+    },
+    scales: {
+      x: {stacked:true, ticks:{font:{size:10}}, grid:{color:'rgba(128,128,128,.1)'}},
+      y: {stacked:true, ticks:{font:{size:11}}, grid:{display:false}}
+    }
+  }
+});
+</script>
